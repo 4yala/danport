@@ -12,11 +12,12 @@ body {
 General
 ========================================= */
 .moderate-main-body{
-    margin: 40px
-    /*clamp(2%, calc(23.33vw - 256px), 10%);*/
-    clamp(2%, calc(36.67vw - 416px), 15%);
     display: flex;
     flex-direction: column;
+    justify-self: center;
+    width: fit-content;
+    
+    margin: 40px 2%;
     gap:40px;
 }
 
@@ -28,12 +29,6 @@ General
     border: 5px solid black;
     border-radius: 15px;
     padding: 20px;
-}
-
-@media (max-width: 1046px) {
-    .moderate-main-body{
-        margin: 40px 10%;
-    }
 }
 
 /*=========================================
@@ -84,10 +79,14 @@ Introduction section classes
 ========================================= */
 .author-introduction-container {
     display: flex;
-    gap: 40px;
     align-items: stretch;
     justify-content: center;
+    
+    width: 0;
+    min-width: 100%;
     min-height: 375px;
+
+    gap: 40px;
 }
 
 .author-profile-image{
@@ -125,9 +124,14 @@ Project catalogue classes
 .catalogue-container{
     display: flex;
     flex-direction: column;
+    align-self: center;
     align-items: center;
+    
+    width: fit-content;
+    
     background-color: cornflowerblue;
 }
+
 .catalogue-container h2{
     font-size: 30px;
 }
@@ -136,9 +140,10 @@ Project catalogue classes
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
     
-    width: 100%;
+    justify-content: space-between;
+    width: fit-content;
+    
     list-style: none;
     gap: 20px;
     padding: 0;
@@ -156,11 +161,15 @@ Project catalogue classes
 Media queries
 ========================================= */
 
-/*When only two cards fit in the catalogue */
-@media (max-width: 1046px) {
-    .moderate-main-body{
-        margin: 40px 10%;
+/*When 3 cards fit in the catalogue*/
+@media (max-width: 1380px){
+    .project-list{
+        max-width: 960px;
     }
+}
+
+/*When only two cards fit in the catalogue */
+@media (max-width: 1046px){
 
     .author-introduction-container{
         flex-direction: column-reverse;
@@ -168,5 +177,20 @@ Media queries
     }
     .author-profile-image{
         max-width: 200px;
+    }
+    .project-list{
+        max-width: 640px;
+    }
+}
+
+/*When only one card fits in the catalogue */
+@media(max-width:712px){
+    .project-list{
+        justify-content: center;
+    }
+    
+    .project-card-PLACEHOLDER{
+        min-height: 455px;
+        width: stretch;
     }
 }
