@@ -4,31 +4,27 @@ Global
 
 body {
     margin: 0;
-    /*background-color: #040316&*/
+    /*background-color: #040316;*/
     
 }
 
 /*=========================================
 General
 ========================================= */
-.moderate-main-body{
+main{
     display: flex;
     flex-direction: column;
-    justify-self: center;
+    
     width: fit-content;
+    max-width: 96%;
     
-    margin: 40px 2%;
+    margin: 40px auto;
     gap:40px;
-}
-
-.large--main-body{
-    
 }
 
 .content-container{
     border: 5px solid black;
     border-radius: 15px;
-    padding: 20px;
 }
 
 /*=========================================
@@ -73,7 +69,6 @@ Header classes
     transform: scale(1.15);
 }
 
-
 /*=========================================
 Introduction section classes
 ========================================= */
@@ -87,6 +82,20 @@ Introduction section classes
     min-height: 375px;
 
     gap: 40px;
+}
+
+
+.author-introduction-statement{
+    background-color: slategrey;
+    padding: 20px;
+}
+
+.author-introduction-statement h2{
+    font-size: 30px;
+}
+
+.author-introduction-statement p{
+    font-size: 20px;
 }
 
 .author-profile-image{
@@ -108,16 +117,30 @@ Introduction section classes
 /*=========================================
 Biography/About me classes
 ========================================= */
+
+.biography-section{
+    display: flex;
+    flex-direction: column;
+    
+    width: 1536px;
+    max-width: 100%;
+}
+
+.biography-section h2{
+    font-size: 24px;
+}
+
 .biography-content{
     background-color: slategrey;
 }
-.biography-content h2{
-    font-size: 30px;
-}
+
 .biography-content p{
-    font-size: 20px;
+    font-size: 16px;
 }
 
+.biography-content ul{
+    
+}
 /*=========================================
 Project catalogue classes
 ========================================= */
@@ -127,7 +150,7 @@ Project catalogue classes
     align-self: center;
     align-items: center;
     
-    width: fit-content;
+    width:fit-content;
     
     background-color: cornflowerblue;
 }
@@ -138,13 +161,14 @@ Project catalogue classes
 
 .project-list{
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    align-items: start;
     
-    justify-content: space-between;
-    width: fit-content;
+    max-width: 100%;
     
     list-style: none;
+    
+    margin-inline: 20px;
     gap: 20px;
     padding: 0;
 }
@@ -163,8 +187,8 @@ Media queries
 
 /*When 3 cards fit in the catalogue*/
 @media (max-width: 1380px){
-    .project-list{
-        max-width: 960px;
+    .catalogue-container{
+        width: 1000px;
     }
 }
 
@@ -178,8 +202,9 @@ Media queries
     .author-profile-image{
         max-width: 200px;
     }
-    .project-list{
-        max-width: 640px;
+    
+    .catalogue-container{
+        width: 680px;
     }
 }
 
@@ -187,10 +212,14 @@ Media queries
 @media(max-width:712px){
     .project-list{
         justify-content: center;
+        padding-inline: 20px;
+        
+        width: 100%;
+        
     }
     
     .project-card-PLACEHOLDER{
         min-height: 455px;
-        width: stretch;
+        width: 100%;
     }
 }
