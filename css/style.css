@@ -2,29 +2,94 @@
 Global
 ========================================= */
 
-body {
-    margin: 0;
-    /*background-color: #040316;*/
+:root{
+    --bg-dark: oklch(0.1 0.05 226);
+    --bg: oklch(0.15 0.05 226);
+    --bg-light: oklch(0.2 0.05 226);
+    --text: oklch(0.96 0.1 226);
+    --text-muted: oklch(0.76 0.1 226);
+    --highlight: oklch(0.5 0.1 226);
+    --border: oklch(0.4 0.1 226);
+    --border-muted: oklch(0.3 0.1 226);
+    --primary: oklch(0.76 0.1 226);
+    --secondary: oklch(0.76 0.1 46);
+    --danger: oklch(0.7 0.1 30);
+    --warning: oklch(0.7 0.1 100);
+    --success: oklch(0.7 0.1 160);
+    --info: oklch(0.7 0.1 260);
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
     
 }
 
-/*=========================================
-General
-========================================= */
-main{
+
+
+body {
+    font-family: "Nunito", sans-serif;
+    
+    margin: 0;
+    background-color: var(--bg-dark);
+}
+
+main {
     display: flex;
     flex-direction: column;
     
     width: fit-content;
     max-width: 96%;
-    
     margin: 40px auto;
+    
     gap:40px;
 }
 
-.content-container{
-    border: 5px solid black;
-    border-radius: 15px;
+
+/*=========================================
+General Reuse
+========================================= */
+
+.tag-list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap:15px;
+    
+    padding: 0;
+}
+
+
+.tag{
+    display: flex;
+    align-items: center;
+    
+    gap:5px;
+    
+    padding-block: 3px;
+    padding-inline: 3px;
+    
+    border: 1px solid var(--border-muted);
+    border-radius: 5px;
+    
+    background-color: var(--bg-light);
+
+    text-decoration: none;
+}
+
+.tag span{
+    color: var(--text);
+    
+}
+.tag img{
+    width: 20px;
+    height: 20px;
+    
+    object-fit: contain;
+    filter: invert(1);
 }
 
 /*=========================================
@@ -36,7 +101,7 @@ Header classes
     justify-content: space-between;
     align-items: center;
     padding: 12px 24px;
-    background-color: #2c2c2c;
+    background-color: var(--bg);
 }
 
 .header-options{
@@ -49,10 +114,10 @@ Header classes
 }
 
 .header-nav-link{
-    color: white;
+    display: inline-block;
     text-decoration: none;
     font-size: 18px;
-    display: inline-block;
+    color: var(--primary);
 }
 
 .header-icon{
@@ -76,33 +141,41 @@ Introduction section classes
     display: flex;
     align-items: stretch;
     justify-content: center;
+
+    gap: 40px;
     
     width: 0;
     min-width: 100%;
     min-height: 375px;
-
-    gap: 40px;
 }
 
 
 .author-introduction-statement{
-    background-color: slategrey;
     padding: 20px;
+
+    border: 5px var(--highlight);
+    border-radius: 15px;
+    
+    background-color: var(--bg-light);
 }
 
 .author-introduction-statement h2{
     font-size: 30px;
+    
+    color: var(--text);
 }
 
 .author-introduction-statement p{
     font-size: 20px;
+    
+    color: var(--text-muted);
 }
 
 .author-profile-image{
     aspect-ratio: 1/1;
     max-width: 300px;
     flex-shrink: 0;
-    border: 5px solid black;
+    border: 5px var(--border-muted);
     border-radius: 15px;
     align-self: center;
 }
@@ -128,14 +201,23 @@ Biography/About me classes
 
 .biography-section h2{
     font-size: 24px;
+    
+    color: var(--text);
 }
 
 .biography-content{
-    background-color: slategrey;
+    padding: 20px;
+    
+    border: 5px var(--border-muted);
+    border-radius: 15px;
+    
+    background-color: var(--bg-light);
 }
 
 .biography-content p{
-    font-size: 16px;
+    font-size: 18px;
+    
+    color: var(--text-muted);
 }
 
 .biography-content ul{
@@ -147,36 +229,41 @@ Project catalogue classes
 .catalogue-container{
     display: flex;
     flex-direction: column;
-    align-self: center;
     align-items: center;
     
     width:fit-content;
+    max-width: 100%;
+    padding-inline: 20px;
+
+    border: 5px var(--border);
+    border-radius: 15px;
     
-    background-color: cornflowerblue;
+    background-color: var(--bg-light);
 }
 
 .catalogue-container h2{
     font-size: 30px;
+    
+    color: var(--text);
 }
 
 .project-list{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: start;
-    
-    max-width: 100%;
-    
     list-style: none;
     
-    margin-inline: 20px;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    
+    width: 1260px; /*PROVISIONAL, ACCOUNTED FOR BY 4 CARDS, AND 3 GAPS INBETWEEN THE CARDS*/
+    max-width: 100%;
+    
     padding: 0;
 }
 
 .project-card-PLACEHOLDER{
     display: flex;
     justify-content: center;
-    background-color: darkseagreen;
+    background-color: var(--primary);
     height: 350px;
     width: 300px;
 }
@@ -187,8 +274,8 @@ Media queries
 
 /*When 3 cards fit in the catalogue*/
 @media (max-width: 1380px){
-    .catalogue-container{
-        width: 1000px;
+    .project-list{
+        width: 940px;
     }
 }
 
@@ -203,19 +290,15 @@ Media queries
         max-width: 200px;
     }
     
-    .catalogue-container{
-        width: 680px;
+    .project-list{
+        width: 620px;
     }
 }
 
 /*When only one card fits in the catalogue */
 @media(max-width:712px){
     .project-list{
-        justify-content: center;
-        padding-inline: 20px;
-        
-        width: 100%;
-        
+        width: 500px;
     }
     
     .project-card-PLACEHOLDER{
