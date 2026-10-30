@@ -1,0 +1,1 @@
+﻿export const SITE_ROOT = new URL('../', import.meta.url);
