@@ -6,6 +6,8 @@ let cardTemplate = null;
 
 
 //Functions
+
+//Init
 async function initRenderer(){
     if(!catalogue) {return;}
     
@@ -24,6 +26,8 @@ async function loadCardTemplate(){
     
     return template;
 }
+
+//Catalogue loading
 function loadUnfilteredList(){
     let projectList = [];
     switch (catalogue.dataset.catalogue){
@@ -39,6 +43,7 @@ function loadUnfilteredList(){
 }
 
 
+//Card populator
 function renderCatalogue(projectList){
     if(!Array.isArray(projectList)){
         throw new Error('No project data provided');}
@@ -47,20 +52,44 @@ function renderCatalogue(projectList){
     projectList.forEach(project => {
         const card = cardTemplate.content.cloneNode(true);
         
-        const thumbnail = card.querySelector('[data-thumbnail]')
-        thumbnail.src = new URL(project.thumbnail, SITE_ROOT);
-        thumbnail.alt = project.title;
-        
-        const title = card.querySelector('[data-title]');
-        title.textContent = project.title;
-        
-        const desc = card.querySelector('[data-desc]');
-        desc.textContent = project.description;
-        
-        catalogue.append(card);
+        catalogue.append(createCard(project, cardTemplate));
     })
     
 }
+
+function createCard(project, template){
+    const cardElem = template.content.cloneNode(true)
+    
+    const thumbnail = cardElem.querySelector('[data-thumbnail]')
+    thumbnail.src = new URL(project.thumbnail, SITE_ROOT);
+    thumbnail.alt = project.title;
+
+    const title = cardElem.querySelector('[data-title]');
+    title.textContent = project.title;
+
+    const desc = cardElem.querySelector('[data-desc]');
+    desc.textContent = project.description;
+    
+    const tagContainer = cardElem.querySelector('[data-tags]');
+    populateTags(project.tags, tagContainer);
+    
+    return cardElem;
+}
+
+function populateTags(tags = [], listContainer){
+    tags.forEach(tag =>{
+        const tagLabel = document.createElement('li');
+        tagLabel.classList.add('tag')
+        
+        const tagText = document.createElement('span');
+        tagText.textContent = tag;
+        
+        tagLabel.append(tagText);
+        
+        listContainer.append(tagLabel);
+    })
+}
+
 
 //Execution
 initRenderer();
