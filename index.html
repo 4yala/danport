@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/about-me-style.css">
+        <link rel="stylesheet" href="css/catalogue-style.css">
+        
         <link rel="icon" href="images/generic/star.png">
         <title>Portfolio - Home</title>
     </head>
@@ -13,8 +16,8 @@
         <div id="site-header"></div>
         <main>
             <section aria-label="Author introduction"
-                class="author-introduction-container">
-                <div class="author-introduction-statement">
+                class="author-introduction">
+                <div class="introduction-statement">
                     <h2>Welcome to my portfolio!</h2>
                     <p>Hi, I'm Daniel</p>
                     <p>
@@ -33,8 +36,8 @@
             <section aria-label="Featured projects"
                 class="catalogue-container">
                 <h2>Featured Projects</h2>
-                <ul data-catalogue="featured" class="project-list" >
-                    <li class="project-card-PLACEHOLDER">
+                <ul data-catalogue="featured" class="card-listing" >
+                    <li class="project-card">
                         <img src="images/projects/website-thumbnail.png" alt="">
                         <h3>danport.com</h3>
                         <p>
@@ -45,7 +48,7 @@
                             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
                             deserunt mollit anim id est laborum.
                         </p>
-                        <ul class="project-tags">
+                        <ul class="">
                             <li class="tag">
                                 <span>Web Development</span></li>
                             <li class="tag">
@@ -56,21 +59,14 @@
                                 <span>Dummy tag</span></li>
                         </ul>
                     </li>
-                    <li class="project-card-PLACEHOLDER">
-                        <h3>Project card</h3>
-                    </li>
-                    <li class="project-card-PLACEHOLDER">
-                        <h3>Project card</h3>
-                    </li>
-                    <li class="project-card-PLACEHOLDER">
-                        <h3>Project card</h3>
-                    </li>
                 </ul>
+                
                 <a href="projects.html">More</a>
             </section>
         </main>
     
         <script src="js/main.js"></script>
         <script type="module" src="js/project-modules/project-renderer.js"></script>
+        
     </body>
 </html>                     

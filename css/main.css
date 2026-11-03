@@ -1,0 +1,159 @@
+/*=========================================
+Global
+========================================= */
+
+:root{
+    --bg-dark: oklch(0.1 0.05 226);
+    --bg: oklch(0.15 0.05 226);
+    --bg-light: oklch(0.2 0.05 226);
+    --text: oklch(0.96 0.1 226);
+    --text-muted: oklch(0.76 0.1 226);
+    --highlight: oklch(0.5 0.1 226);
+    --border: oklch(0.4 0.1 226);
+    --border-muted: oklch(0.3 0.1 226);
+    --primary: oklch(0.76 0.1 226);
+    --secondary: oklch(0.76 0.1 46);
+    --danger: oklch(0.7 0.1 30);
+    --warning: oklch(0.7 0.1 100);
+    --success: oklch(0.7 0.1 160);
+    --info: oklch(0.7 0.1 260);
+}
+
+@font-face {
+    font-family: "Nunito";
+    src: url("../fonts/Nunito-VariableFont_wght.ttf") format("truetype");
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
+    
+}
+
+
+
+body {
+    font-family: "Nunito", sans-serif;
+    
+    margin: 0;
+    
+    background-color: var(--bg-dark);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 40px auto;
+    gap:40px;
+    
+    width: fit-content;
+    max-width: 96%;
+}
+
+/*=========================================
+Header classes
+========================================= */
+.main-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    
+    background-color: var(--bg);
+}
+
+.header-options{
+    list-style: none;
+    
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    gap: 25px;
+}
+
+.header-nav-link{
+    text-decoration: none;
+    font-size: 18px;
+    
+    display: inline-block;
+    
+    color: var(--primary);
+}
+
+.header-icon{
+    width: 28px;
+    height: 28px;
+    
+    filter: invert(1);
+}
+
+.header-interactable {
+    transition: transform 0.2s ease;
+}
+
+.header-interactable:hover {
+    transform: scale(1.15);
+}
+
+
+/*=========================================
+Tags
+========================================= */
+
+.tag-list{
+    list-style: none;
+    
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    gap:15px;
+}
+
+.tag{
+    display: flex;
+    align-items: center;
+    padding: 3px;
+    gap:5px;
+    
+    flex-shrink: 0;
+    
+    border: 1px solid var(--border-muted);
+    border-radius: 5px;
+    
+    background-color: var(--bg-light);
+    
+    text-decoration: none;
+}
+
+.tag span{
+    color: var(--text);
+}
+
+.tag img{
+    object-fit: contain;
+    
+    width: 20px;
+    height: 20px;
+    
+    filter: invert(1);
+}
+
+/*=========================================
+Content containers
+========================================= */
+
+.content-container{
+    padding: 20px;
+
+    border: 5px solid var(--border-muted);
+    border-radius: 15px;
+
+    background-color: var(--bg-light);
+}
+
+
+.content-container p{
+    font-size: 18px;
+    
+    color: var(--text-muted);
+}

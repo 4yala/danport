@@ -1,0 +1,80 @@
+﻿/*=========================================
+Home page introduction
+========================================= */
+.author-introduction{
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 40px;
+    
+    width: 0;
+    min-width: 100%;
+    min-height: 375px;
+}
+
+.author-introduction.compact-view{
+    flex-direction: column-reverse;
+    align-items: center;
+}
+
+.author-introduction.compact-view .author-profile-image{
+    max-width: 200px;
+}
+
+.introduction-statement{
+    padding: 20px;
+    
+    border: 5px solid var(--border-muted);
+    border-radius: 15px;
+    
+    background-color: var(--bg-light);
+}
+
+.introduction-statement h2{
+    font-size: 30px;
+    
+    color: var(--text);
+}
+
+.introduction-statement p{
+    font-size: 20px;
+    
+    color: var(--text-muted);
+}
+
+
+.author-profile-image{
+    align-self: center;
+    overflow: hidden;
+    
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+    max-width: 300px;
+    
+    border: 5px solid var(--border-muted);
+    border-radius: 15px;
+}
+
+.author-profile-image img{
+    display: block;
+    object-fit: cover;
+    
+    width:100%;
+}
+
+/*=========================================
+Biography page
+========================================= */
+.biography-section{
+    display: flex;
+    flex-direction: column;
+    
+    width: 1536px;
+    max-width: 100%;
+}
+
+.biography-section h2{
+    font-size: 24px;
+    
+    color: var(--text);
+}
