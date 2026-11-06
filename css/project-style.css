@@ -1,17 +1,23 @@
 ﻿.catalogue-container{ /* Root element */
-    /* Variables */
+    /* =========Variables========= */
+
+    /* Configuration */
+    --card-width: 300px;
+    --card-height: 350px;
+    --card-separation: 20px;
+    --card-border-size: 2px;
     
+    /* Calculated */
+    --total-list-width: 100%;
     
-    
-    /* Properties */
+    /* =========Properties========= */
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-inline: 20px; /* To be made a variable -> Card separation */
+    padding-inline: 20px;
     
     width: fit-content;
     max-width: 100%;
-    
     
     border: 5px solid var(--border);
     border-radius: 15px;
@@ -19,7 +25,16 @@
     background-color: var(--bg-light);
 }
 
-.catalogue-container h2{
+.catalogue-container.compact-mode .card-listing{
+    width: 500px;
+}
+
+.catalogue-container.compact-mode .project-card{
+    height: 455px;
+    width: 100%;
+}
+
+.catalogue-container > h2{
     font-size: 30px;
     
     color: var(--text);
@@ -31,9 +46,9 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0;
-    gap: 20px; /* To be made a variable -> Card separation */
+    gap: var(--card-separation);
     
-    width: 1260px; /* Accounted for by 4 cards currently 1260, to be made a variable -> Total width */
+    width: var(--total-list-width); /* 1260px;  Accounted for by 4 cards currently 1260, to be made a variable -> Total width */
     max-width: 100%;
 }
 
@@ -46,16 +61,16 @@ Project card classes
     overflow: hidden;
     gap: 10px;
     
-    height: 350px; /* To be made a variable -> Project card height */
-    width: 300px; /* To be made a variable ->  Project card width */
+    width: var(--card-width);
+    height: var(--card-height);
     
-    border: 0 solid var(--border);
+    border: var(--card-border-size) solid var(--border);
     border-radius: 15px;
     
     background-color: var(--primary);
 }
 
-.project-card img{ /* Thumbnail */
+.project-card > img{ /* Thumbnail */
     width: 100%;
     max-width: 100%;
     
@@ -63,18 +78,18 @@ Project card classes
     object-fit: cover;
 }
 
-.project-card h3{ /* Title */
+.project-card > h3{ /* Title */
     margin-inline: 3px;
     margin-block: 0;
 }
 
-.project-card p{ /* Description */ 
+.project-card > p{ /* Description */ 
     margin-inline: 3px;
     margin-block: 0;
     overflow: hidden;
 }
 
-.project-card ul{ /* Tags */
+.project-card > ul{ /* Tags */
     list-style: none;
     
     display: flex;
@@ -95,14 +110,15 @@ Project inspector classes
 Media queries
 ========================================= */
 
-/*When 3 cards fit in the catalogue*/
+/*
+/*When 3 cards fit in the catalogue
 @media (max-width: 1380px){
     .card-listing{
         width: 940px;
     }
 }
 
-/*When only two cards fit in the catalogue */
+/*When only two cards fit in the catalogue 
 @media (max-width: 1046px){
 
     .author-introduction-container{
@@ -118,7 +134,7 @@ Media queries
     }
 }
 
-/*When only one card fits in the catalogue */
+/*When only one card fits in the catalogue 
 @media(max-width:712px){
     .card-listing{
         width: 500px;
@@ -129,3 +145,4 @@ Media queries
         width: 100%;
     }
 }
+*/

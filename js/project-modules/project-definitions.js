@@ -1,4 +1,5 @@
-﻿export class Project{
+﻿//Data classes
+export class Project{
     constructor({
         id,
         title,
@@ -22,6 +23,32 @@
     }
 }
 
+export class ExternalLink{
+    constructor({url, label, icon})
+    {
+        this.url = url;
+        this.label = label;
+        this.icon = icon;
+    }
+}
+
+export class CatalogueConfig{
+    constructor({maxCardsPerRow, cardWidth, cardHeight, cardSeparation, cardBorderSize}){
+        this.maxCardsPerRow = maxCardsPerRow;
+        this.cardWidth = cardWidth;
+        this.cardHeight = cardHeight;
+        this.cardSeparation = cardSeparation;
+        this.cardBorderSize = cardBorderSize;
+    }
+    
+    calculateTotalWidth(cardsPerRow = this.maxCardsPerRow){
+        return (cardsPerRow * this.cardWidth)
+        + (this.cardSeparation * (cardsPerRow -1))
+        + (this.cardBorderSize * cardsPerRow * 2);
+    };
+}
+
+//Read only objects
 export const ProjectTags = Object.freeze({
     /*Project type*/
     GAME: 'Game',
@@ -45,11 +72,7 @@ export const ProjectStatus = Object.freeze({
     CANCELLED: 'Cancelled',
 })
 
-export class ExternalLink{
-    constructor({url, label, icon})
-    {
-        this.url = url;
-        this.label = label;
-        this.icon = icon;
-    }
-}
+export const CatalogueType = Object.freeze({
+    FEATURED: 'featured',
+    ALL: 'all'
+})
