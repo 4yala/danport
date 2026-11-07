@@ -32,22 +32,6 @@ export class ExternalLink{
     }
 }
 
-export class CatalogueConfig{
-    constructor({maxCardsPerRow, cardWidth, cardHeight, cardSeparation, cardBorderSize}){
-        this.maxCardsPerRow = maxCardsPerRow;
-        this.cardWidth = cardWidth;
-        this.cardHeight = cardHeight;
-        this.cardSeparation = cardSeparation;
-        this.cardBorderSize = cardBorderSize;
-    }
-    
-    calculateTotalWidth(cardsPerRow = this.maxCardsPerRow){
-        return (cardsPerRow * this.cardWidth)
-        + (this.cardSeparation * (cardsPerRow -1))
-        + (this.cardBorderSize * cardsPerRow * 2);
-    };
-}
-
 //Read only objects
 export const ProjectTags = Object.freeze({
     /*Project type*/

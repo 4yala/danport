@@ -12,12 +12,12 @@ Home page introduction
     min-height: 375px;
 }
 
-.author-introduction.compact-view{
+.author-introduction.compact-mode{
     flex-direction: column-reverse;
     align-items: center;
 }
 
-.author-introduction.compact-view .author-profile-image{
+.author-introduction.compact-mode .author-profile-image{
     max-width: 200px;
 }
 
@@ -30,13 +30,13 @@ Home page introduction
     background-color: var(--bg-light);
 }
 
-.introduction-statement h2{
+.introduction-statement > h2{
     font-size: 30px;
     
     color: var(--text);
 }
 
-.introduction-statement p{
+.introduction-statement > p{
     font-size: 20px;
     
     color: var(--text-muted);
@@ -55,7 +55,7 @@ Home page introduction
     border-radius: 15px;
 }
 
-.author-profile-image img{
+.author-profile-image > img{
     display: block;
     object-fit: cover;
     
@@ -73,7 +73,7 @@ Biography page
     max-width: 100%;
 }
 
-.biography-section h2{
+.biography-section > h2{
     font-size: 24px;
     
     color: var(--text);
