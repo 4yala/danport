@@ -1,5 +1,5 @@
 ﻿import {CatalogueConfigs} from "./catalogue-configs.js";
-import {ScaleState, ScaleStateListener} from "../general-definitions/scale-definitions.js";
+import {ScaleOverride, ScaleState, ScaleStateListener} from "../general-definitions/scale-definitions.js";
 
 //================ Variables ================
 
@@ -46,9 +46,21 @@ export function initScaler() {
         '--card-border-size',
         `${scaleConfig.cardBorderSize}px`
     );
-
+    catalogue.style.setProperty(
+        '--total-list-width',
+        `${scaleConfig.calculateTotalWidth()}px`
+    );
+    
     //Initialise services
-    catalogueState.registerEvent(ScaleState.COMPACT, onCompact)
+    const catalogueOverride = new ScaleOverride({
+        name: 'Catalogue Override',
+        states: [ScaleState.COMPACT],
+        onApply: () => {onCompact(true)},
+        onRemove: () => {onCompact(false)},
+    })
+    
+    
+    catalogueState.registerOverride(catalogueOverride);
     stateListeners.push(catalogueState);
     window.addEventListener('resize', handleResize);
     
@@ -62,14 +74,13 @@ function updateScale(newCardAmount){
         console.error(`Requested card amount is already set ${newCardAmount}`);
         return;
     }
-
     //Apply measurements
     const totalWidth = scaleConfig.calculateTotalWidth(newCardAmount);
     catalogue.style.setProperty(
         '--total-list-width',
         `${totalWidth}px`
     );
-
+    
     //Update state
     if(newCardAmount === 1)
         broadcastScaleState(ScaleState.COMPACT);
@@ -101,7 +112,6 @@ function handleResize(){
     else if(availableWidth < lastScreenWidth && 
         targetCardsPerRow > 1){
         const listWidth = cardContainer.clientWidth;
-
         while(targetCardsPerRow > 1 &&
             listWidth < scaleConfig.calculateTotalWidth(targetCardsPerRow))
         {

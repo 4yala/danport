@@ -1,4 +1,4 @@
-import {ScaleStateListener, ScaleState} from "../general-definitions/scale-definitions.js";
+import {ScaleState, ScaleOverride, ScaleStateListener} from "../general-definitions/scale-definitions.js";
 import {registerStateListener} from "../project-modules/catalogue-scaler.js";
 
 //Variables
@@ -8,17 +8,19 @@ const stateListener = new ScaleStateListener();
 
 
 //Functions
-function onModerateScale(toggle){
-    if(typeof toggle !== 'boolean'){
-        console.error(`Parameter introduced = ${toggle}, is not a boolean`)
-        return;
-    }
+function compressIntro(toggle){
     introductionContainer.classList.toggle('compact-mode', toggle)
 }
 
 function bindScaleBehaviour(){
-    //Initialise listener class
-    stateListener.registerEvent(ScaleState.MODERATE, onModerateScale)
+    const introOverride = new ScaleOverride({
+        name: "compact-intro",
+        states: [ScaleState.COMPACT, ScaleState.MODERATE],
+        onApply: () => {compressIntro(true)},
+        onRemove: () => {compressIntro(false)},
+    });
+
+    stateListener.registerOverride(introOverride);
     
     //Send to the scaler
     registerStateListener(stateListener);

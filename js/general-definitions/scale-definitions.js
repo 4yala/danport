@@ -5,36 +5,74 @@ export const ScaleState = Object.freeze({
     COMPACT: 'compact',
 })
 
-export class ScaleStateListener {
-    currentState = null;
-    stateEvents = new Map();
+export class ScaleStateListener{
+    //Init properties
+    #overrides = new Map();
     
-    registerEvent(state, onTrigger){
-        if(!Object.values(ScaleState).includes(state)){
-            console.error(`Invalid state submitted: ${state}`);
+    //Dynamic properties
+    currentState = null;
+    #appliedOverrides = new Map();
+    
+    registerOverride(override){
+        if(!override instanceof ScaleOverride){
+            console.error("Invalid override attempted to register");
             return;
         }
-        if(typeof onTrigger !== 'function'){
-            console.error(`Invalid callback submitted`);
+        if(this.#overrides.has(override.name)){
+            console.error(`Override already registered = ${override.name}`);
             return;
         }
         
-        this.stateEvents.set(state, onTrigger);
+        this.#overrides.set(override.name, override);
     }
     
     updateState(state){
-        //validation
-        if(!Object.values(ScaleState).includes(state)){            
+        if(!Object.values(ScaleState).includes(state)){
             console.error(`Invalid state update submitted: ${state}`);
             return;}
         if(this.currentState === state) return;
         
-        //Execution
-        this.stateEvents.get(this.currentState)?.(false);
-        this.stateEvents.get(state)?.(true);
+        this.#updateOverrides(state);
         
-        //Update state
         this.currentState = state;
+    }
+    
+    #updateOverrides(state){
+        //Apply overrides based on state
+        this.#overrides.forEach((override, name) => 
+        {
+            if(!override.states.includes(state))return;
+            override.onApply();
+            this.#appliedOverrides.set(override.name, override);
+        })
+        
+        this.#appliedOverrides.forEach((override, name) =>{
+            if(!override.states.includes(state)){
+                override.onRemove();
+                this.#appliedOverrides.delete(name);
+            }
+        })
+    }
+}
+
+export class ScaleOverride{
+    constructor({name, states, onApply, onRemove}){
+        //Validation
+        if(!Array.isArray(states)){
+            throw new Error(`Invalid states collection assigned for override ${name}`);
+        }
+        if(typeof onApply !== "function"){
+            throw new Error(`Invalid entry callback for override ${name}`);
+        }
+        if(typeof onApply !== "function"){
+            throw new Error(`Invalid exit callback for override ${name}`);
+        }
+        
+        //Apply properties
+        this.name = name;
+        this.states = states;
+        this.onApply = onApply;
+        this.onRemove = onRemove;
     }
 }
 
