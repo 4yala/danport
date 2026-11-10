@@ -1,4 +1,7 @@
-﻿.catalogue-container{ /* Root element */
+﻿/*=========================================
+Catalogue classes
+========================================= */
+.catalogue-container{ /* Root element */
     /* =========Variables========= */
 
     /* Configuration */
@@ -101,4 +104,87 @@ Project card classes
     flex-shrink: 0;
     height: fit-content;
     max-width: 100%;
+}
+
+/*=========================================
+Inspector classes
+========================================= */
+
+.inspector-container{
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    padding: 20px;
+    gap: 5px;
+    
+    width: 600px;
+    max-width: 100%;
+}
+
+.inspector-container > h2{
+    font-size: 2rem;
+
+    align-self: center;
+    
+    color: var(--highlight);
+}
+
+.inspector-thumbnail{
+    overflow:hidden;
+    
+    width: 100%;
+    max-width: 100%;
+    
+    aspect-ratio: 16/9;
+    
+    border: 2px solid var(--border-muted);
+    border-radius: 15px;
+}
+
+.inspector-thumbnail > img{
+    display: block;
+    object-fit: cover;
+    
+    width: 100%;
+}
+
+.inspector-tags{
+    list-style: none;
+    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    gap: 5px;
+}
+
+.inspector-inline-property{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    
+    color: var(--text-muted);
+}
+
+.inspector-inline-property > h3{
+    margin: 0;
+}
+
+.inspector-block-property{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    
+    color: var(--text-muted);
+}
+
+.inspector-block-property > h3{
+    margin: 0;
+}
+.inspector-block-property > p{
+    margin: 0;
+}
+
+.inspector-concealer{
+
 }

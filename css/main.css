@@ -29,7 +29,6 @@ Global
 }
 
 
-
 body {
     font-family: "Nunito", sans-serif;
     
@@ -95,6 +94,19 @@ Header classes
     transform: scale(1.15);
 }
 
+/*=========================================
+Misc
+========================================= */
+.screen-overlay{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    
+    position: fixed;
+    inset: 0;
+    
+    background-color: rgb(219 219 219 / 0.3);
+}
 
 /*=========================================
 Tags
@@ -151,9 +163,9 @@ Content containers
     background-color: var(--bg-light);
 }
 
-
 .content-container p{
     font-size: 18px;
     
     color: var(--text-muted);
 }
+
