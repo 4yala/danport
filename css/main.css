@@ -82,8 +82,6 @@ Header classes
 .header-icon{
     width: 28px;
     height: 28px;
-    
-    filter: invert(1);
 }
 
 .header-interactable {
@@ -98,7 +96,7 @@ Header classes
 Misc
 ========================================= */
 .screen-overlay{
-    display: flex;
+    display: none;
     justify-content: flex-end;
     align-items: center;
     
@@ -106,6 +104,19 @@ Misc
     inset: 0;
     
     background-color: rgb(219 219 219 / 0.3);
+    backdrop-filter: blur(5px);
+}
+
+.screen-overlay.active {
+    display: flex;
+}
+
+.inline-icon{
+    object-fit: contain;
+    align-self: center;
+    
+    width: 1rem;
+    height: 1rem;
 }
 
 /*=========================================

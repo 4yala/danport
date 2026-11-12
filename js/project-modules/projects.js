@@ -46,7 +46,7 @@ export const projects = [
         uploadDate: "30/10/2026",
         highlights:[
             'Developed through HTML, CSS and JavaScript',
-            'Hosted on Github Pages'
+            'Hosted on GitHub Pages'
         ]
     })
     

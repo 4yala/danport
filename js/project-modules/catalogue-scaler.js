@@ -28,6 +28,7 @@ const catalogueState = new ScaleStateListener();
     
 //================ Functions ================
 
+//Public API
 export function initScaler() {
     //Apply initial config
     catalogue.style.setProperty(
@@ -66,6 +67,14 @@ export function initScaler() {
     
     //Determine state at init
     handleResize();
+}
+
+export function registerStateListener(listener){
+    if(!listener instanceof ScaleStateListener){
+        console.error("Submitted listener is not a a valid ScaleStateListener instance");
+        return;
+    }
+    stateListeners.push(listener);
 }
 
 //Processes
@@ -140,10 +149,3 @@ function onCompact(toggle){
 }
 
 //Public API
-export function registerStateListener(listener){
-    if(!listener instanceof ScaleStateListener){
-        console.error("Submitted listener is not a a valid ScaleStateListener instance");
-        return;
-    }
-    stateListeners.push(listener);
-}
