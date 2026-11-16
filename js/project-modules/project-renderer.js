@@ -1,4 +1,5 @@
 ﻿import * as ProjectManager from "./project-manager.js";
+import * as MainUtil from "../main.js"
 import {SITE_ROOT} from "../paths.js";
 
 
@@ -30,19 +31,29 @@ async function loadInspector(){
     template.innerHTML = html;
     
     const inspectorElem = template.content.firstElementChild;
-    document.querySelector("#overlay-container").append(inspectorElem);
-    
+    MainUtil.overlayContainer.append(inspectorElem);
     
     //Bind exit logic
     const exitButton = inspectorElem.querySelector('.inspector-concealer');
     exitButton.addEventListener('click', hideInspector);
     
+    let pointerStartTarget = null;
+    inspectorElem.addEventListener('pointerdown', (event) =>{
+        pointerStartTarget = event.target;
+    })
+    
+    
+    
+    
     inspectorElem.addEventListener('click', (event) => {
         console.log('Target:', event.target);
         console.log('Current target:', event.currentTarget);
-        if (event.target === inspectorElem) {
+        if (event.target === inspectorElem &&
+            event.target === pointerStartTarget) {
             hideInspector();
         }
+        
+        pointerStartTarget = null;
     });
     
     return inspectorElem;
@@ -109,8 +120,6 @@ function renderCatalogue(projectList){
     
     cardContainer.replaceChildren();
     projectList.forEach(project => {
-        const card = cardTemplate.content.cloneNode(true);
-        
         cardContainer.append(createCard(project, cardTemplate));
     })
     
@@ -143,49 +152,68 @@ function renderInspector(project){
         console.error("Inspector elem invalid");
         return;
     }
-
-    console.log(projectInspector);
-    const title = projectInspector.querySelector('[data-title]');
-    if(title){
-        title.textContent = project.title;
-    }
     
-    const thumbnail = projectInspector.querySelector('[data-thumbnail]');
-    thumbnail.src = new URL(project.thumbnail, SITE_ROOT);
-    thumbnail.alt = project.title;
+    populateInspector(project);
     
-    const tagContainer = projectInspector.querySelector('[data-tags]');
-    populateTags(project.tags, tagContainer);
-    
-    const status = projectInspector.querySelector('[data-status]');
-    status.textContent = project.status;
-    
-    const date = projectInspector.querySelector('[data-date]');
-    date.textContent = project.uploadDate;
-    
-    const desc = projectInspector.querySelector('[data-desc]');
-    desc.textContent = project.description;
-    
-    const highlightContainer = projectInspector.querySelector('[data-highlights]');
-    highlightContainer.replaceChildren();
-    
-    for (const highlight of project.highlights){
-        const listElem = document.createElement('li');
-        listElem.textContent = highlight;
-        
-        highlightContainer.append(listElem);
-    }
-    
-    const linkContainer = projectInspector.querySelector('[data-links]');
-    linkContainer.replaceChildren();
-    
-    for (const link of project.links){
-        const listElem = document.createElement('li');
-    }
-    
+    MainUtil.enableOverlay(projectInspector);
+    document.querySelector('body').classList.add('overlay-active');
     projectInspector.classList.add('active');
 }
 
+function populateInspector(project){
+    const title = projectInspector.querySelector('[data-title]');
+    title.textContent = project.title;
+
+    const thumbnail = projectInspector.querySelector('[data-thumbnail]');
+    thumbnail.src = new URL(project.thumbnail, SITE_ROOT);
+    thumbnail.alt = project.title;
+
+    const tagContainer = projectInspector.querySelector('[data-tags]');
+    populateTags(project.tags, tagContainer);
+
+    const status = projectInspector.querySelector('[data-status]');
+    status.textContent = project.status;
+
+    const date = projectInspector.querySelector('[data-date]');
+    date.textContent = project.uploadDate;
+
+    const desc = projectInspector.querySelector('[data-desc]');
+    desc.textContent = project.description;
+
+    const highlightContainer = projectInspector.querySelector('[data-highlights]');
+    highlightContainer.replaceChildren();
+
+    for (const highlight of project.highlights){
+        const listElem = document.createElement('li');
+        listElem.textContent = highlight;
+
+        highlightContainer.append(listElem);
+    }
+
+    const linkContainer = projectInspector.querySelector('[data-links]');
+    linkContainer.replaceChildren();
+
+    for (const link of project.links){
+        const linkElem = document.createElement('a');
+        linkElem.textContent = link.label;
+        linkElem.href = link.url;
+
+        if(link.icon){
+            const iconElem = document.createElement('img');
+            iconElem.src = new URL(link.icon, SITE_ROOT).href;
+            iconElem.alt = "Link icon";
+
+            iconElem.classList.add("inline-icon");
+
+            linkElem.append(iconElem);
+        }
+
+        const listElem = document.createElement('li');
+        listElem.append(linkElem);
+
+        linkContainer.append(listElem);
+    }
+}
 function hideInspector(){
-    projectInspector.classList.remove('active');
+    MainUtil.disableOverlay(projectInspector);
 }

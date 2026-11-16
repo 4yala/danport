@@ -20,14 +20,15 @@ export const projects = [
         status: ProjectStatus.COMPLETED,
         uploadDate: "30/04/2025",
         highlights:[
+            'One of my final projects in my undergrad at ARU',
             'A collaborative project developed by 24 students',
             'Developed weapon, power-up, and resource systems',
-            'Developed through UE5 blueprints'
+            'Developed through UE5 blueprints',
         ],
         links:[
             new ExternalLink({
                 url: "https://clever-critter-games.itch.io/crystal-chaos",
-                label: "itch.io page",
+                label: "Download at ich.io",
                 icon: 'images/icons/itch-io-icon.png'
                 }
             )

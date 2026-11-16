@@ -14,7 +14,7 @@ export class ScaleStateListener{
     #appliedOverrides = new Map();
     
     registerOverride(override){
-        if(!override instanceof ScaleOverride){
+        if(!(override instanceof ScaleOverride)){
             console.error("Invalid override attempted to register");
             return;
         }

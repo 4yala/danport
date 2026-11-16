@@ -37,6 +37,10 @@ body {
     background-color: var(--bg-dark);
 }
 
+body.overlay-active{
+    overflow: hidden;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -95,25 +99,26 @@ Header classes
 /*=========================================
 Misc
 ========================================= */
-.screen-overlay{
-    display: none;
-    justify-content: flex-end;
-    align-items: center;
+.overlay-root{
+    overflow-y: auto;
+    overscroll-behavior: contain;
     
     position: fixed;
     inset: 0;
     
-    background-color: rgb(219 219 219 / 0.3);
-    backdrop-filter: blur(5px);
+    pointer-events: none;
 }
 
-.screen-overlay.active {
+.active {
     display: flex;
+    pointer-events: auto;
 }
 
 .inline-icon{
     object-fit: contain;
     align-self: center;
+    
+    margin-inline: 5px;
     
     width: 1rem;
     height: 1rem;
@@ -157,8 +162,6 @@ Tags
     
     width: 20px;
     height: 20px;
-    
-    filter: invert(1);
 }
 
 /*=========================================
