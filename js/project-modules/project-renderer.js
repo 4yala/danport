@@ -1,6 +1,7 @@
 ﻿import * as ProjectManager from "./project-manager.js";
 import * as MainUtil from "../main.js"
 import {SITE_ROOT} from "../paths.js";
+import "../utility-modules/extension-functions.js"
 
 
 //================ Variables ================
@@ -37,25 +38,21 @@ async function loadInspector(){
     const exitButton = inspectorElem.querySelector('.inspector-concealer');
     exitButton.addEventListener('click', hideInspector);
     
-    let pointerStartTarget = null;
-    inspectorElem.addEventListener('pointerdown', (event) =>{
-        pointerStartTarget = event.target;
-    })
     
     
-    
-    
-    inspectorElem.addEventListener('click', (event) => {
-        console.log('Target:', event.target);
-        console.log('Current target:', event.currentTarget);
-        if (event.target === inspectorElem &&
-            event.target === pointerStartTarget) {
+    inspectorElem.addCustomEventListener('tracked-click', (event) =>{
+        if(event.releaseEvent.target === inspectorElem){
             hideInspector();
         }
-        
-        pointerStartTarget = null;
-    });
+    })
     
+    /*
+    inspectorElem.addEventListener('click', (event) => {
+        if (event.target === inspectorElem) {
+            hideInspector();
+        }
+    });
+    */
     return inspectorElem;
 }
 
